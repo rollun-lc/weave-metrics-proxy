@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs22-debian12
+FROM node:20
 
 WORKDIR /usr/src/app
 
@@ -8,4 +8,4 @@ EXPOSE 80
 
 USER root
 
-ENTRYPOINT [ "/nodejs/bin/node", "main.js"]
+ENTRYPOINT [ "node", "main.js"]
