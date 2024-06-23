@@ -1,0 +1,16 @@
+initial-service-host: "hetzner-03"
+d2c-service-config:
+  type: "docker"
+  image: "ghcr.io/rollun-lc/weave-metrics-proxy/weave-metrics-proxy/image"
+  version: "latest"
+  name: "wnp-hetzner-03"
+  description: "A weave net metrics proxy. Serves metrics from weave net to prometheus."
+  project: "Monitoring:VM"
+  ports:
+    - value: 80
+      protocol: "TCP"
+  env:
+    - name: "PORT"
+      value: "80"
+    - name: "METRICS_FILE"
+      value: "/usr/src/app/weave-metrics.txt"

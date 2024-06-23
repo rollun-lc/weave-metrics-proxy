@@ -1,0 +1,30 @@
+name: CI
+'on': push
+env:
+  IMAGE: ghcr.io/$GITHUB_REPOSITORY/$(basename $PWD)/image
+jobs:
+  build:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Docker login
+        run: >-
+          docker login ghcr.io -u ${{ secrets.DOCKER_USER }} -p ${{
+          secrets.DOCKER_PASS }}
+      - name: Build
+        run: docker build -t ${{ env.IMAGE }}:latest .
+      - name: Push
+        run: docker push ${{ env.IMAGE }}:latest
+  deploy-hetzner-03:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: rollun-com/actions/update-d2c-service@master
+        with:
+          config-path: ./config/hetzner-03.yml
+          d2c-email: ${{ secrets.D2C_USER }}
+          d2c-password: ${{ secrets.D2C_PASSWORD }}
+          sm-user: ${{ secrets.SM_USER }}
+          sm-password: ${{ secrets.SM_PASSWORD }}
