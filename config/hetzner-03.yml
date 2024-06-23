@@ -13,4 +13,7 @@ d2c-service-config:
     - name: "PORT"
       value: "80"
     - name: "METRICS_FILE"
-      value: "/usr/src/app/weave-metrics.txt"
+      value: "/tmp/weave-metrics/metrics.txt"
+  volumes:
+    - dst: /tmp/weave-metrics
+      src: /ebs/containers/wnp-hetzner-03/weave-metrics
