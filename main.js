@@ -1,7 +1,6 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 
-const hostname = 'localhost';
 const port = process.env.PORT || 3000;
 const metricsFilePath = process.env.METRICS_FILE || './metrics.txt';
 
@@ -26,8 +25,8 @@ const server = createServer(async (req, res) => {
   }
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(port, () => {
+  console.log(`Server running at on port ${port}`);
 });
 
 const signals = ['SIGINT', 'SIGTERM'];
