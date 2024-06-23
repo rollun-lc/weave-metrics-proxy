@@ -1,7 +1,7 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 
-const hostname = '127.0.0.1';
+const hostname = 'localhost';
 const port = process.env.PORT || 3000;
 const metricsFilePath = process.env.METRICS_FILE || './metrics.txt';
 
