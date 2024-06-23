@@ -3,7 +3,7 @@ d2c-service-config:
   type: "docker"
   image: "ghcr.io/rollun-lc/weave-metrics-proxy/weave-metrics-proxy/image"
   version: "latest"
-  name: "wnp-hetzner-03"
+  name: "hetzner-03-wnp"
   description: "A weave net metrics proxy. Serves metrics from weave net to prometheus."
   project: "Monitoring:VM"
   ports:
@@ -16,4 +16,4 @@ d2c-service-config:
       value: "/tmp/weave-metrics/metrics.txt"
   volumes:
     - dst: /tmp/weave-metrics
-      src: /ebs/containers/wnp-hetzner-03/weave-metrics
+      src: /ebs/containers/hetzner-03-wnp/weave-metrics
