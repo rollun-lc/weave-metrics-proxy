@@ -6,4 +6,6 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["main.js"]
+USER root
+
+ENTRYPOINT [ "/nodejs/bin/node", "main.js"]
