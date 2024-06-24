@@ -1,4 +1,4 @@
-initial-service-host: "selenoid-ashburn"
+initial-service-host: "selenoid-asburn"
 d2c-service-config:
   type: "docker"
   image: "ghcr.io/rollun-lc/weave-metrics-proxy/weave-metrics-proxy/image"
