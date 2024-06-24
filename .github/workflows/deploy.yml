@@ -16,6 +16,20 @@ jobs:
       - name: Push
         run: docker push ${{ env.IMAGE }}:latest
 
+  deploy-hetzner-catalog:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: rollun-com/actions/update-d2c-service@master
+        with:
+          config-path: ./config/hetzner-catalog.yml
+          d2c-email: ${{ secrets.D2C_USER }}
+          d2c-password: ${{ secrets.D2C_PASSWORD }}
+          sm-user: ${{ secrets.SM_USER }}
+          sm-password: ${{ secrets.SM_PASSWORD }}
+
   deploy-hetzner-03:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
@@ -29,6 +43,91 @@ jobs:
           d2c-password: ${{ secrets.D2C_PASSWORD }}
           sm-user: ${{ secrets.SM_USER }}
           sm-password: ${{ secrets.SM_PASSWORD }}
+
+  deploy-hetzner-01-test:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: rollun-com/actions/update-d2c-service@master
+        with:
+          config-path: ./config/hetzner-01-test.yml
+          d2c-email: ${{ secrets.D2C_USER }}
+          d2c-password: ${{ secrets.D2C_PASSWORD }}
+          sm-user: ${{ secrets.SM_USER }}
+          sm-password: ${{ secrets.SM_PASSWORD }}
+
+  deploy-hetzner-staging:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: rollun-com/actions/update-d2c-service@master
+        with:
+          config-path: ./config/hetzner-staging.yml
+          d2c-email: ${{ secrets.D2C_USER }}
+          d2c-password: ${{ secrets.D2C_PASSWORD }}
+          sm-user: ${{ secrets.SM_USER }}
+          sm-password: ${{ secrets.SM_PASSWORD }}
+
+  deploy-rollun-db-replv2:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: rollun-com/actions/update-d2c-service@master
+        with:
+          config-path: ./config/rollun-db-replv2.yml
+          d2c-email: ${{ secrets.D2C_USER }}
+          d2c-password: ${{ secrets.D2C_PASSWORD }}
+          sm-user: ${{ secrets.SM_USER }}
+          sm-password: ${{ secrets.SM_PASSWORD }}
+
+  deploy-rollun-db-master:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: rollun-com/actions/update-d2c-service@master
+        with:
+          config-path: ./config/rollun-db-master.yml
+          d2c-email: ${{ secrets.D2C_USER }}
+          d2c-password: ${{ secrets.D2C_PASSWORD }}
+          sm-user: ${{ secrets.SM_USER }}
+          sm-password: ${{ secrets.SM_PASSWORD }}
+
+  deploy-rollun-crm:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: rollun-com/actions/update-d2c-service@master
+        with:
+          config-path: ./config/rollun-crm.yml
+          d2c-email: ${{ secrets.D2C_USER }}
+          d2c-password: ${{ secrets.D2C_PASSWORD }}
+          sm-user: ${{ secrets.SM_USER }}
+          sm-password: ${{ secrets.SM_PASSWORD }}
+
+  deploy-hetzner-selenoid:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: rollun-com/actions/update-d2c-service@master
+        with:
+          config-path: ./config/hetzner-selenoid.yml
+          d2c-email: ${{ secrets.D2C_USER }}
+          d2c-password: ${{ secrets.D2C_PASSWORD }}
+          sm-user: ${{ secrets.SM_USER }}
+          sm-password: ${{ secrets.SM_PASSWORD }}
+
   deploy-selenoid-asburn:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
@@ -38,6 +137,20 @@ jobs:
       - uses: rollun-com/actions/update-d2c-service@master
         with:
           config-path: ./config/selenoid-asburn.yml
+          d2c-email: ${{ secrets.D2C_USER }}
+          d2c-password: ${{ secrets.D2C_PASSWORD }}
+          sm-user: ${{ secrets.SM_USER }}
+          sm-password: ${{ secrets.SM_PASSWORD }}
+
+  deploy-rollun-tmp-db:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: rollun-com/actions/update-d2c-service@master
+        with:
+          config-path: ./config/rollun-tmp-db.yml
           d2c-email: ${{ secrets.D2C_USER }}
           d2c-password: ${{ secrets.D2C_PASSWORD }}
           sm-user: ${{ secrets.SM_USER }}
