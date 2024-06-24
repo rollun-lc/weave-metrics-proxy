@@ -115,3 +115,28 @@ for (const vm of vms) {
 }
 
 fs.writeFileSync('./.github/workflows/deploy.yml', deployWorkflow);
+
+console.group('Crons for each VM:');
+for (const vm of vms) {
+  console.log(
+    `* * * * * curl 0.0.0.0:6782/metrics > /ebs/containers/${vm.exporterName}/weave-metrics/metrics.txt`
+  );
+}
+console.groupEnd();
+
+console.log('Prometheus scrape config:');
+
+let prometheusScrapeConfig = `
+  - job_name: 'weave_exporter'
+    scrape_interval: 15s
+    static_configs:
+      - targets: [
+`;
+
+for (const vm of vms) {
+  prometheusScrapeConfig += `        '${vm.exporterName}:80',\n`;
+}
+
+prometheusScrapeConfig += '      ]';
+
+console.log(prometheusScrapeConfig);

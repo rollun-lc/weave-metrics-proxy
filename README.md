@@ -22,3 +22,5 @@ node generate-deploy-configs.js
 ```
 
 If you have new VM, just simply add it to a script and re-run it.
+
+Script will also print all crons for all VMs and Prometheus config for all VMs.
