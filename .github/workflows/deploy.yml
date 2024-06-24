@@ -29,3 +29,16 @@ jobs:
           d2c-password: ${{ secrets.D2C_PASSWORD }}
           sm-user: ${{ secrets.SM_USER }}
           sm-password: ${{ secrets.SM_PASSWORD }}
+  deploy-selenoid-ashburn:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: rollun-com/actions/update-d2c-service@master
+        with:
+          config-path: ./config/selenoid-ashburn.yml
+          d2c-email: ${{ secrets.D2C_USER }}
+          d2c-password: ${{ secrets.D2C_PASSWORD }}
+          sm-user: ${{ secrets.SM_USER }}
+          sm-password: ${{ secrets.SM_PASSWORD }}

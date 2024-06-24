@@ -1,0 +1,19 @@
+initial-service-host: "selenoid-ashburn"
+d2c-service-config:
+  type: "docker"
+  image: "ghcr.io/rollun-lc/weave-metrics-proxy/weave-metrics-proxy/image"
+  version: "latest"
+  name: "s-ashburn-wnp"
+  description: "A weave net metrics proxy. Serves metrics from weave net to prometheus."
+  project: "Monitoring:VM"
+  ports:
+    - value: 80
+      protocol: "TCP"
+  env:
+    - name: "PORT"
+      value: "80"
+    - name: "METRICS_FILE"
+      value: "/tmp/weave-metrics/metrics.txt"
+  volumes:
+    - dst: /tmp/weave-metrics
+      src: /ebs/containers/s-ashburn-wnp/weave-metrics
